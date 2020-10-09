@@ -1,4 +1,5 @@
 # Wordpress file-manager-plugin Arbitrary file upload vulnerability
+version: 6.0-6.8
 
 ```shell
 python wordpress_filemanager.py url cmd
